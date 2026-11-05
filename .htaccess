@@ -1,0 +1,3 @@
+
+# Aplicar la autenticación antes de ejecutar cada PHP
+php_value auto_prepend_file "C:/sistema_estudiantes_ms/xampp/htdocs/sistema_gestion_aldea/config/seguridad.php"

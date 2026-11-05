@@ -1,0 +1,979 @@
+/* --- Contenedor Principal --- */
+.container {
+  margin-top: 70px;
+  width: 100%;
+  padding: 40px;
+}
+
+/* --- Header y Títulos --- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 50px 0px;
+  gap: 20px;
+}
+
+.header-title {
+  /* Espacio reservado para estilos futuros */
+}
+
+.header-title h2 {
+  margin-bottom: 5px;
+  font-size: 30px;
+  color: var(--text-light);
+}
+
+.header-title p {
+  color: var(--line);
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* --- Botones --- */
+.btn-primary {
+  background-color: var(--color-morado-1);
+  position: relative;
+  color: var(--color-white-1);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  overflow: visible;
+  transition: transform 0.3s ease;
+}
+
+.btn-outline {
+  background: var(--bg-soft);
+  border: 2px solid var(--color-morado-1);
+  color: var(--color-morado-1);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Pseudo-elemento para el efecto "Glow" */
+.btn-primary::before,
+.btn-outline::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--color-morado-1),
+    var(--color-rosa-1)
+  );
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.btn-primary:hover::before,
+.btn-outline:hover::before {
+  opacity: 1;
+}
+
+/* --- Dashboard y Cards --- */
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 16px;
+}
+
+.card-estadisticas {
+  background-color: var(--color-white-1);
+  box-shadow: 0 5px 6px var(--color-white-1);
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-estadisticas::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(
+    to right,
+    var(--color-morado-1),
+    var(--color-rosa-1)
+  );
+}
+
+.card-title {
+  color: var(--text-light);
+  font-size: 18px;
+}
+
+.stat-number {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.stat-info {
+  color: var(--color-verde-2);
+  font-size: 17px;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.muted {
+  color: var(--line);
+  font-size: 0.9rem;
+}
+
+/* --- Modales --- */
+.modal-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  transition-property: backdrop-filter, background;
+  transition-duration: 0.2s, 0.2s;
+  transition-timing-function: ease-in, ease;
+  backdrop-filter: blur(0px);
+  background-color: transparent;
+  transform: scale(0);
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  transform: scale(0);
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  margin-top: 150px;
+  opacity: 0;
+  transition-property: opacity, margin;
+  transition-duration: 0.2s, 0.2s;
+  transition-timing-function: ease-in, ease;
+}
+
+/* Estados Activos del Modal */
+.modal-overlay.abrir-modal-overlay {
+  transform: scale(1);
+  backdrop-filter: blur(5px);
+  background-color: var(--text-light-o);
+  position: fixed;
+}
+
+.modal.abrir-modal-overlay {
+  transform: scale(1);
+  margin-top: 0px;
+  opacity: 1;
+}
+
+.body.abrir-modal-overlay {
+  overflow: hidden;
+}
+
+/* --- Contenido del Modal --- */
+.modal-content {
+  background: var(--color-white-1);
+  box-shadow: 0px 0px 5px var(--bg-soft-2);
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 320px;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.modal-content h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.modal-content label {
+  text-align: left;
+  width: 100%;
+}
+
+/* --- Formulario dentro del Modal --- */
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-content form input {
+  background-color: var(--bg-soft);
+  padding: 5px 10px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: bold;
+}
+
+.modal-content form input:hover {
+  box-shadow: 0px 0px 5px var(--bg-soft-2);
+}
+
+.modal-content form input:focus {
+  outline: none;
+  box-shadow: 0px 0px 5px var(--bg-soft-2);
+  background-color: var(--color-morado-light-1);
+}
+
+/* --- Botón Cerrar (X) --- */
+#btnCerrar {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: transparent;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#btnCerrar:hover {
+  background-color: var(--bg-soft);
+}
+
+/* --- Acciones y Botón Primario --- */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  width: 100%;
+}
+
+.primary {
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid var(--color-morado-1);
+  font-weight: bold;
+  background-color: var(--color-morado-1);
+  width: 100%;
+  transition: all 0.2s ease;
+  color: var(--color-white-1);
+}
+
+.primary:hover {
+  background-color: var(--color-morado-light-1);
+  color: var(--color-morado-2);
+}
+
+/* --- Mensajes de Error --- */
+.error {
+  color: var(--color-rojo-2);
+  margin-top: 8px;
+}
+/* --- Contenedor Crear Trayectos --- */
+.container-crear-trayectos-iniciales {
+  display: inline-flex;
+  flex-direction: column;
+  background-color: var(--color-white-1);
+  box-shadow: 0 4px 6px var(--bg-soft-2);
+  border-radius: 5px;
+  padding: 0 10px;
+  gap: 10px;
+  max-height: 0; /* colapsado */
+  opacity: 0; /* invisible */
+  overflow: hidden; /* contenido oculto */
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  margin-top: 0;
+}
+
+.active-container-crear-trayectos-iniciales {
+  max-height: 200px;
+  opacity: 1;
+  transform: translateY(0);
+  padding: 10px;
+  margin-top: 10px;
+}
+
+/* --- Inputs y Botones de Grupos --- */
+.grupos-container input {
+  padding: 5px 15px;
+  border: 1px solid var(--bg-soft-2);
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.grupos-container input:focus {
+  border-color: var(--color-morado-1);
+  box-shadow: 0 0 0 2px var(--color-morado-light-2);
+}
+
+.grupos-container input::placeholder {
+  padding: 5px 15px;
+}
+
+.btn-guardar-grupos-ini {
+  padding: 5px 10px;
+  background-color: var(--color-verde-1);
+  color: var(--color-white-1);
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.btn-guardar-grupos-ini:hover {
+  cursor: pointer;
+  background-color: var(--color-verde-2);
+}
+
+/* --- Títulos de Sección --- */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  margin: 40px 0 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--bg-soft-2);
+  color: var(--text-light);
+}
+
+.section-title i {
+  color: var(--color-azul-2);
+}
+
+.h2-grupo-inicial {
+  display: flex;
+  gap: 10px;
+}
+
+/* --- Icono Plus Animado --- */
+.plus-icon {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.plus-icon:hover {
+  background-color: var(--color-morado-light-2);
+}
+
+.bar {
+  position: absolute;
+  background-color: var(--text);
+  border-radius: 2px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.horizontal {
+  width: 17px;
+  height: 3px;
+}
+
+.vertical {
+  width: 3px;
+  height: 17px;
+}
+
+/* Animación del Plus al activar */
+.plus-icon.active-plus .vertical {
+  transform: translate(-50%, -50%) rotate(90deg) translateX(10px);
+  opacity: 0;
+}
+
+.plus-icon.active-plus .horizontal {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+/* --- Contenedores de Carreras (Grids) --- */
+.careers-container {
+  margin: 50px 0px;
+}
+
+.container-lista-carreras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+#lista-trayectos-iniciales {
+  margin: 20px 0px;
+}
+
+.careers-container-inicial {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 20px 0px;
+}
+
+.careers-container-inicial .career-card {
+  min-width: 300px;
+}
+
+.career-card {
+  min-width: 400px;
+}
+
+/* --- Header de Card de Carrera --- */
+.career-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--color-white-1);
+  box-shadow: 0px 0px 5px var(--bg-soft-2);
+  color: var(--text-light);
+  cursor: pointer;
+  overflow: visible;
+  transition: all 0.2s ease;
+}
+
+/* Efecto Glow en Career Card */
+.career-header::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border-radius: inherit;
+  background: linear-gradient(
+    150deg,
+    var(--color-morado-1),
+    var(--color-rosa-1)
+  );
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+/* --- Efectos de Interacción en Cards --- */
+.career-header:hover::before {
+  opacity: 1;
+}
+
+/* Variación de color para el glow inicial */
+.career-header.career-header-inicial::before {
+  background: linear-gradient(
+    150deg,
+    var(--color-verde-1),
+    var(--color-rojo-1)
+  );
+}
+
+/* --- Tipografía de la Card --- */
+.career-title {
+  font-size: 25px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.career-id {
+  font-size: 15px;
+  opacity: 0.8;
+  margin-bottom: 15px;
+}
+
+/* --- Estadísticas en Card --- */
+.career-stats {
+  display: flex;
+  gap: 25px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 15px;
+  opacity: 0.8;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.career-body {
+  padding: 25px;
+}
+
+#pensum-inicial {
+  margin: 50px 0px;
+}
+
+/* --- Formulario Agregar Materia --- */
+.form-Agregar-Materia {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0px 10px;
+  box-shadow: 0 4px 6px var(--bg-soft-2);
+  border-radius: 5px;
+  background-color: var(--color-white-1);
+  max-height: 0; /* colapsado */
+  opacity: 0; /* invisible */
+  overflow: hidden; /* contenido oculto */
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  margin-top: 0;
+}
+
+.active-form-Agregar-Materia {
+  max-height: 300px;
+  opacity: 1;
+  transform: translateY(0);
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.form-Agregar-Materia button {
+  background-color: var(--color-morado-1);
+  border: none;
+  color: var(--color-white-1);
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  padding: 8px 15px;
+  font-weight: bold;
+}
+
+.form-Agregar-Materia button:hover {
+  background-color: var(--color-morado-2);
+}
+
+/* --- Inputs de Materia --- */
+.materia {
+  display: flex;
+  gap: 5px;
+}
+
+.materia input {
+  padding: 5px 15px;
+  border: 1px solid var(--bg-soft-2);
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.materia input:focus {
+  border-color: var(--color-morado-1);
+  box-shadow: 0 0 0 2px var(--color-morado-light-1);
+}
+
+.materia input::placeholder {
+  padding: 5px 15px;
+}
+
+/* --- Segundo Icono Plus (Plus-Icon-2) --- */
+.plus-icon-2 {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+}
+
+.plus-icon-2:hover {
+  background-color: var(--color-morado-light-2);
+}
+
+/* Reutilización de estilos de barras para plus-icon-2 */
+.plus-icon-2.active-plus .vertical {
+  transform: translate(-50%, -50%) rotate(90deg) translateX(10px);
+  opacity: 0;
+}
+
+.plus-icon-2.active-plus .horizontal {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+/* --- Tablas de Pensum --- */
+.container-pensum-materias-ini-tabla {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.pensum-materias-ini-tabla {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px var(--bg-soft-2);
+  overflow-x: auto; /* Scroll horizontal si la tabla es muy ancha */
+}
+
+.pensum-materias-ini-tabla table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 800px;
+}
+
+.pensum-materias-ini-tabla table th,
+.pensum-materias-ini-tabla table td {
+  border: 1px solid var(--bg-soft-2);
+  padding: 6px;
+  text-align: center;
+}
+
+
+.pensum-materias-ini-tabla table tr{
+  transition: background-color .2s ease;
+}
+
+
+
+.pensum-materias-ini-tabla table th {
+  background-color: var(--color-morado-light-1);
+}
+
+.pensum-materias-ini-tabla table tr:nth-child(odd) {
+  background-color: var(--color-white-1);
+}
+
+.pensum-materias-ini-tabla table tr:nth-child(even) {
+  background-color: var(--bg-soft);
+}
+
+.pensum-materias-ini-tabla table tr:hover{
+  background-color: var(--color-yellow-light-1);
+    cursor: pointer;
+}
+
+
+
+/* Color de fondo para la fila seleccionada con clic derecho */
+tr.fila-marcada {
+    background-color: var(--color-azul-light-1) !important; /* Azul suave de selección */
+    transition: background-color 0.2s ease;
+}
+
+/* --- Menú Contextual (Clic Derecho) --- */
+.context-menu {
+  display: block;
+  position: fixed;
+  background: var(--color-white-1);
+  border: 1px solid var(--bg-soft-2);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  border-radius: 8px;
+  width: 250px;
+
+  /* Animación inicial */
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.context-menu.active {
+  opacity: 1;
+  transform: scaleY(1);
+  pointer-events: auto;
+}
+
+.context-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+}
+
+.context-menu li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-radius: 5px;
+}
+
+.context-menu li:hover {
+  background: var(--bg-soft);
+}
+
+#menu-eliminar {
+  color: var(--color-rojo-1);
+  background: var(--color-rojo-light-1);
+  font-weight: bold;
+  border-radius: 50px;
+  margin: 5px 0px;
+  text-align: center;
+}
+
+#menu-eliminar:hover {
+  background: var(--color-rojo-light-2) !important;
+}
+
+/* --- Estado de la Card (Context Abierto) --- */
+.context-open .career-header {
+  box-shadow: 0 0 0 2px var(--color-azul-3) !important;
+}
+
+.filter-switch-wrapper {
+  display: flex;
+
+  margin: 20px 0px;
+}
+
+.filter-switch {
+  position: relative;
+  display: flex;
+  background: var(--color-morado-light-1); /* Fondo gris claro */
+  border-radius: 50px;
+  padding: 4px;
+  width: 300px;
+  user-select: none;
+}
+
+.filter-switch .slider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  background: var(--color-white-1); /* Color del marcador */
+  border-radius: 50px;
+  box-shadow: 0 2px 5px var(--text-light-o);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+/* Movimiento del marcador hacia la derecha */
+.filter-switch.show-inactivas .slider {
+  transform: translateX(100%);
+}
+
+.switch-btn {
+  position: relative;
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  z-index: 2;
+  transition: color 0.3s;
+}
+
+.switch-btn.active {
+  color: #1e293b; /* Texto más oscuro cuando está activo */
+}
+
+.card.context-open .career-header::before {
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  filter: blur(0px);
+}
+
+
+
+/* Estilos para el menú flotante del click derecho */
+.custom-context-menu {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    z-index: 9999;
+    padding: 5px;
+    min-width: 150px;
+}
+
+.item-menu-eliminar {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: var(--color-rojo-1);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.item-menu-eliminar:hover {
+    background-color: var(--color-rojo-light-1);
+}
+
+/* Opcional: Opacidad para filas inactivas */
+.materia-inactiva {
+    background-color: #f9f9f9;
+    color: #95a5a6;
+}
+
+/* --- Edición Inline (Inputs) --- */
+.edit-inline-input {
+  width: 100%;
+  font-size: 1.17em;
+  font-weight: bold;
+  background-color: var(--color-azul-light-1);
+  border-radius: 8px;
+  border: none;
+  padding: 5px 5px;
+  outline: none;
+  text-align: center;
+  animation: fadeInInput 0.2s ease;
+  margin-bottom: 5px;
+}
+
+
+
+
+@keyframes fadeInInput {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+.menu-status-toggle {
+  font-weight: 500;
+}
+
+/* --- Media Queries (Adaptabilidad) --- */
+
+/* Tablets y Laptops pequeñas */
+@media (max-width: 992px) {
+  .container {
+    padding: 20px;
+  }
+
+  .dashboard {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .container-lista-carreras {
+    display: grid;
+    /* Crea 2 columnas, cada una de 1 fracción del espacio disponible */
+    grid-template-columns: repeat(2, 1fr); 
+    
+    /* Opcional: añade un espacio entre las columnas y filas */
+    gap: 20px; 
+}
+
+  .careers-container-inicial .career-card {
+    min-width: 100%;
+  }
+.career-card{
+  min-width: auto;
+}
+  .careers-container-inicial{
+    display: grid;
+    /* Crea 2 columnas, cada una de 1 fracción del espacio disponible */
+    grid-template-columns: repeat(2, 1fr); 
+    
+    /* Opcional: añade un espacio entre las columnas y filas */
+    gap: 20px; 
+  }
+
+  .header {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .materia {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .form-Agregar-Materia {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .form-Agregar-Materia button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 680px) {
+    .container-lista-carreras {
+
+    grid-template-columns: repeat(1, 1fr); 
+    
+    
+}
+
+
+ .careers-container-inicial{
+
+    grid-template-columns: repeat(1, 1fr); 
+    
+   
+  }
+
+
+.career-card{
+  width: 100%;
+}
+
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,160 @@
+
+/* ========================================
+   SEGURIDAD DE LA CUENTA
+   ======================================== */
+main{
+    margin: auto;
+    padding: 20px;
+}
+h1 {
+    margin: 0 0 5px;
+    color: #202b3c;
+    font-size: 28px;
+}
+
+h2 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #28364a;
+    font-size: 18px;
+}
+
+p {
+    color: #647084;
+    line-height: 1.6;
+}
+
+form {
+    margin-top: 10px;
+    padding: 10px;
+    background: #ffffff;
+    border: 1px solid var(--bg-soft-2);
+    border-radius: 10px;
+    
+}
+
+label {
+    display: block;
+    margin: 16px 0 8px;
+    color: #344054;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+input{
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--bg-soft-2);
+    border-radius: 8px;
+    background: #fff;
+    color: #202b3c;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+input:focus {
+    border-color: var(--color-morado-1);
+    
+}
+
+button {
+    margin-top: 18px;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background: var(--color-morado-1);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+button:hover {
+    background: var(--color-morado-2);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.error,
+.ok,
+.warn {
+    margin: 18px 0;
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.error {
+    background: #fff0f0;
+    border: 1px solid #ffd5d5;
+    color: #b42318;
+}
+
+.ok {
+    background: #ecfdf3;
+    border: 1px solid #abefc6;
+    color: #067647;
+}
+
+.warn {
+    background: #fff7e6;
+    border: 1px solid #f5d58a;
+    color: #815600;
+}
+
+.codes {
+    margin: 14px 0;
+    padding: 20px;
+    border: 1px dashed #cbd3df;
+    border-radius: 10px;
+    background: #f7f9fc;
+    color: #202b3c;
+    font-family: monospace;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 2;
+    letter-spacing: 1px;
+    overflow-wrap: anywhere;
+}
+
+.links {
+    margin: 26px 0 10px;
+    color: #98a2b3;
+    font-size: 14px;
+    text-align: center;
+}
+
+.links a {
+    color: var(--color-morado-1);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 23px;
+    }
+
+    form {
+        padding: 16px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .codes {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,687 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+    
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 70px;
+            padding: 30px 40px;
+
+            overflow: hidden;
+            margin-bottom: 100px;
+        }
+        
+ 
+        .container-btn-type-form{
+      
+            margin: 20px;
+            border-radius: 50px;
+            padding: 8px;
+            width: 350px;
+            display: inline-block;
+    position: relative;
+    cursor: pointer;
+    color: var(--text-light);
+    background-color: transparent; /* fondo oscuro para resaltar el borde */
+    overflow: hidden; /* importante para que el borde no se salga */
+        }
+
+      .td-sombreado {
+    background-color: var(--bg-soft-2) !important;
+    
+    /* CAMBIO IMPORTANTE: Usamos outline en vez de border */
+    outline: 1px solid var(--color-morado-2) !important; 
+    
+    /* Truco para dibujar el borde hacia ADENTRO y no solapar */
+    outline-offset: -1px; 
+    
+    /* Elevamos la celda para que tape los bordes de las vecinas */
+    position: relative;
+    z-index: 10;
+}
+
+/* Aseguramos que el handle (cuadradito) esté siempre ENCIMA de la celda */
+.fill-handle {
+    z-index: 20; 
+}
+
+/* Efecto de copiado tipo Excel */
+@keyframes marching-ants {
+    0% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 10; }
+}
+
+.celdas-copiadas {
+    outline: 2px dashed var(--color-verde-2) !important;
+    position: relative;
+    z-index: 5;
+    animation: marching-ants 0.4s infinite linear;
+}
+
+/* Mejora de enfoque para saber dónde estamos */
+td:focus-within {
+    outline: 2px solid var(--color-morado-2) !important;
+    background-color: var(--color-white-1) !important;
+     /* CAMBIO IMPORTANTE: Usamos outline en vez de border */
+
+    
+    /* Truco para dibujar el borde hacia ADENTRO y no solapar */
+    outline-offset: -2px; 
+    
+    /* Elevamos la celda para que tape los bordes de las vecinas */
+    position: relative;
+}
+
+/* Evita que el cursor de texto aparezca si solo estás sombreando */
+td input {
+    cursor: default;
+}
+
+/* Cuando el usuario hace clic o navega a la celda, se comporta como un input normal */
+td input:focus {
+    cursor: text;
+    background-color: var(--color-white-1);
+}
+
+/* Quita las flechas de los inputs de número (Chrome, Safari, Edge, Opera) */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Quita las flechas en Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+/* El cuadro de relleno (el puntito) */
+.fill-handle {
+    width: 8px;
+    height: 8px;
+    background-color: #217346; /* Verde Excel */
+    border: 1px solid #fff;
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    cursor: crosshair;
+    z-index: 100; /* Por encima de todo */
+    pointer-events: auto; /* Asegura que reciba el clic */
+}
+
+/* Color para la previsualización del arrastre */
+.preview-fill {
+    background-color: rgba(33, 115, 70, 0.1) !important;
+    border: 1px dashed #217346 !important;
+}
+
+/* Contenedor relativo para la celda que tiene el handle */
+.td-sombreado {
+    position: relative;
+}
+
+/* Área de previsualización mientras arrastras */
+.preview-fill {
+    background-color: var(--color-verde-light-2) !important;
+    border: 1px dashed var(--color-verde-2) !important;
+}
+
+/* borde animado */
+.container-btn-type-form::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 50px;
+    padding: 4px;
+    background: linear-gradient(90deg, #ff3cac, #784ba0, #2b86c5, #ff3cac);
+    background-size: 300% 300%;
+    -webkit-mask: 
+        linear-gradient(var(--color-white-1) 0 0) content-box, 
+        linear-gradient(var(--color-white-1) 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: borderMove 6s linear infinite;
+}
+
+/* animación del borde */
+@keyframes borderMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+
+
+
+        .btn-type-form{
+            gap: 2%;
+            display: flex;
+            position: relative;
+            
+            
+        }
+
+        .btn-type-form button{
+            border: none;
+            background-color: transparent;
+            width: 50%;
+            border-radius: 50px;
+            height: 100%;
+            padding: 10px;
+            display: inline-block;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color .2s ease;
+
+        }
+
+        .btn-type-form button:hover{
+             background-color: var(--color-morado-light-2);
+        }
+
+        .btn-type-form div{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 49%;
+            height: 100%;
+            border-radius: 50px;
+            border: 1px solid var(--color-morado-2);
+            transition: all .3s ease;
+            
+            
+        }
+
+        .btn-type-form button:nth-child(1){
+            background-color: var(--color-morado-light-2);
+        }
+
+        .marcado-btn-form button:nth-child(2){
+            background-color: var(--color-morado-light-2);
+         }
+
+        .marcado-btn-form button:nth-child(1){
+            background: transparent;
+         }
+         .marcado-btn-form button:nth-child(1):hover{
+            background-color: var(--color-morado-light-2);
+         }
+
+        .marcado-btn-form div{
+            left: 51%;
+            
+        }
+
+        .container-header-form-table{
+            display: flex;
+            width: 100%;
+        }
+
+        .container-agregar-filas{
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            gap: 10px;
+            position: relative;
+        }
+
+        .container-agregar-filas h4{
+            color: var(--text-light);
+        }
+
+        .container-agregar-filas button{
+            border-radius: 5px;
+            padding: 5px 7px;
+            border: none;
+            background-color: var(--color-white-1);
+            outline: 1px solid var(--bg-soft-2);
+            cursor: pointer;
+            color: var(--color-morado-1);
+            transition: outline .2s ease;
+        }
+
+        .container-agregar-filas button:hover{
+            outline: 1px solid var(--color-morado-1);
+        }
+
+        .container-agregar-filas input{
+            border: none;
+            padding: 5px 5px;
+            background-color: var(--color-white-1);
+            outline: 2px solid var(--bg-soft-2);
+            border-radius: 5px;
+            color: var(--color-morado-1);
+            font-size: 14px;
+            width: 120px;
+            transition: outline .2s ease;
+            
+        
+        }
+
+        .container-agregar-filas input:focus{
+            outline: 2px solid var(--color-morado-1);
+        }
+
+       
+
+       .nota-agregar-filas {
+            position: absolute;
+            padding: 10px;
+            background-color: var(--color-rojo-light-2);
+            right: 0;
+            top: -50px;
+            border-radius: 4px;
+            color: var(--color-rojo-2);
+            font-weight: bold;
+            z-index: 10;
+            display: none;
+            transition: all .2s ease;
+            font-size: 14px;
+        }
+
+        /* Pseudo-elemento para la “flecha” */
+        .nota-agregar-filas::after {
+            content: "";
+            position: absolute;
+            bottom: -13px;  /* coloca el triángulo justo debajo del mensaje */
+            right: 50px;    /* ajusta según donde quieras que apunte */
+            border-width: 8px;
+            border-style: solid;
+            border-color: var(--color-rojo-light-2) transparent transparent transparent;
+        }
+
+
+       
+        .form-table-container{
+            max-width: 1300px;
+            width: 100%;
+            
+            display: none;
+        }
+        .form-table-container form{
+            width: 100%;
+        }
+   .section-table {
+    overflow: hidden; /* Necesario para ocultar el excedente mientras se anima */
+    margin: 20px 0px;
+    border-radius: 15px;
+    background-color: var(--color-white-1); /* O transparent, según tu diseño */
+    box-shadow: 0 0 15px var(--line);
+    padding: 20px;
+    
+    /* La transición mágica para la altura */
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: auto;
+    will-change: height;
+}
+        
+
+        .section-table h3{
+            width: 100%;
+            padding: 10px 10px;
+          border-radius: 5px;
+          background-color: var(--color-morado-light-1);
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+         .container-table{
+            overflow-x: scroll;
+
+            
+            
+       
+        }
+
+        
+
+        .container-table table{
+            border-collapse: collapse;
+        
+            padding: 10px;
+
+        }
+
+        .container-table table thead{
+            background-color: var(--bg-soft);
+            color: var(--text);
+            
+        }
+
+        .container-table table thead th{
+            padding: 5px;
+        }
+
+
+        .container-table table tr{
+            height: 30px;
+        }
+    
+        .container-table table td{
+            border-right: 1px solid var(--bg-soft-2);
+            border-bottom: 1px solid var(--bg-soft-2);
+            background-color: var(--color-white-1);
+            height: 10px;
+            padding: 0px;
+            position: relative;
+            
+          
+        }
+
+
+        .container-table table td select{
+            padding: 0px 10px;
+            background-color: var(--color-white-1);
+            border-radius: 2px;
+            border: none;
+            font-size: 13px;
+           height: 100%;
+        }
+
+        .container-table table td select:hover{
+             background-color: var(--color-morado-light-1);
+        }
+
+        .container-table table td select:focus{
+            outline: none;
+            background-color: var(--color-morado-light-1);
+        }
+        
+        .eliminar button{
+            border: 2px solid var(--color-rojo-light-2);
+            border-radius: 5px;
+            background-color: var(--bg-soft);
+            padding: 0px 5px;
+            font-size: 12px;
+            transition: background .2s ease;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .eliminar button:hover{
+            background-color: var(--color-rojo-light-2);
+         
+        }
+        .eliminar{
+            text-align: center;
+            padding: 10px;
+         
+        }
+
+        .container-table table tbody td input {
+            border: none;
+            padding: 5px 5px;
+            background-color: transparent;
+           
+            height: 100%;
+            
+            font-size: 13px;
+            }
+
+            /* Hover */
+            .container-table table tbody td input:hover {
+            cursor: pointer;
+            outline: 1px solid var(--color-morado-2);
+       
+            }
+
+            /* Focus */
+            .container-table table tbody td input:focus {
+             background-color: var(--color-white-1);
+            outline: none;
+            }
+
+
+            .container-table table tbody td input:-webkit-autofill {
+                -webkit-box-shadow: 0 0 0px 1000px var(--color-white-1) inset !important; /* tu verde */
+                -webkit-text-fill-color: var(--text); /* color de texto */
+                transition: background-color 5000s ease-in-out 0s; /* truco para evitar flash */
+            }
+        
+            .fila-numero{
+                text-align: center;
+                font-size: 13px;
+                color: var(--text-light);
+            }
+
+       .btn-success{
+           padding: 10px 15px;
+           border: none;
+           background-color: var(--color-morado-1);
+           font-weight: bold;
+           color: var(--color-white-1);
+           cursor: pointer;
+           transition: background .2s ease;
+           border-radius: 5px;
+       }
+
+       .btn-success:hover{
+        background-color: var(--color-morado-2);
+       }
+        
+        .form-container {
+            max-width: 1300px;
+            
+            display: none;
+        }
+
+        
+
+        .mostrar-form{
+            display: block;
+        }
+
+        
+        
+        .section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px dashed var(--bg-soft);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--color-morado-1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title div {
+            margin-right: 10px;
+            background: var(--color-morado-1);
+            width: 40px;
+            height: 40px;
+            color: var(--color-white-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0px;
+
+        }
+
+        .section-title div i{
+            font-size: 20px;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+        
+        .form-group {
+            flex: 1 1 350px;
+            padding: 0 10px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 15px;
+            border: 2px solid var(--bg-soft-2);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--color-morado-1);
+            box-shadow: 0 0 0 3px var(--color-morado-light-2);
+            outline: none;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 5px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .radio-option input {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .address-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--color-morado-1);
+            color: var(--color-white-1);
+            border: none;
+            padding: 14px 28px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background: var(--color-morado-2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--bg-soft-2);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .footer-note {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--bg-soft-2);
+            font-size: 0.9rem;
+        }
+        
+        .required::after {
+            content: " *";
+            color: var(--color-rojo-1);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px;
+            }
+
+            .container {
+        
+            padding: 20px;
+            }
+            .section-table{
+                padding: 10px;
+            }
+      
+        }
+            
+       
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        
+        
+        @media (max-width: 480px) {
+            .form-group {
+                flex: 1 1 100%;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+
+     .container-header-form-table h2{
+            display: none;
+        }
+
+        .container-agregar-filas{
+         
+            margin-left: 0px;
+            gap: 10px;
+           
+        }
+         .container {
+        
+            padding: 10px;
+      
+        }
+
+         .container-table{
+    
+            padding: 10px 5px;
+          
+       
+        }
+
+        .container-table table thead th{
+            padding: 5px;
+            font-size: 13px;
+        }
+
+        .btn-type-form button{
+           padding: 10px 5px;
+          
+        }
+
+        .container-btn-type-form{
+            width: 100%;
+        }
+    }

@@ -1,0 +1,380 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f1f5f9;
+    color: #334155;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background-color: #1e293b;
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info span b{
+    font-size: 1.2rem;
+}
+
+.btns-header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.btn-logout,
+.btn-clave {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    color: white;
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    font-size: 0.875rem;
+    transition: background 0.2s;
+}
+
+.btn-logout {
+    background-color: #6c0303;
+   
+}
+
+.btn-logout:hover {
+    background-color: #a71212;
+}
+
+.btn-clave {
+    background-color: #2e3847;
+}
+
+.btn-clave:hover {
+    background-color: #484c52;
+}
+
+/* Ocultar iconos en escritorio */
+.btn-icon {
+    display: none;
+    width: 18px;
+    height: 18px;
+}
+/* Container */
+.container {
+    max-width: 1100px;
+    margin: 100px auto;
+    padding: 0 1rem;
+}
+
+/* Navigation Tabs */
+.tabs {
+    display: flex;
+    border-bottom: 2px solid #cbd5e1;
+    margin-bottom: 1.5rem;
+    gap: 0.5rem;
+}
+
+.tab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border: none;
+    background: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    color: #1e293b;
+    border-bottom-color: #1e293b;
+}
+
+/* Ocultar iconos por defecto en pantallas grandes */
+.tab-icon {
+    display: none;
+    width: 20px;
+    height: 20px;
+}
+
+/* Content Sections */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Cards and Tables */
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+}
+
+.card h2 {
+    font-size: 1.1rem;
+    color: #0f172a;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.data-item {
+    margin-bottom: 0.75rem;
+}
+
+.data-item label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #64748b;
+    font-weight: 700;
+}
+
+.data-item span {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #1e293b;
+}
+
+
+.container-table{
+    width: 100%;
+    overflow-x: auto;
+}
+/* Custom Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+    min-width: 800px;
+   
+   
+}
+
+th, td {
+    text-align: left;
+    padding: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+}
+
+th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+}
+
+/* --- Botones de Filtro por Periodo --- */
+.period-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.btn-filter {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    padding: 0.45rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-filter:hover {
+    background-color: #e2e8f0;
+    color: #1e293b;
+}
+
+.btn-filter.active {
+    background-color: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+/* Badges */
+.badge {
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge-aprobada {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
+.badge-reprobada {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+.badge-pendiente {
+    background-color: #fef3c7;
+    color: #b45309;
+}
+
+.badge-congelada {
+    background-color: #e2e8f0;
+    color: #475569;
+}
+
+
+
+
+@media (max-width: 850px) {
+header {
+    
+    padding: 1rem 1rem;
+
+}
+
+header h1 {
+    display: none;
+}
+
+.user-info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.user-info span{
+    font-size: 1.5rem;
+}
+
+/* Ocultar el texto */
+    .btn-text {
+        display: none;
+    }
+
+    /* Mostrar solo el icono */
+    .btn-icon {
+        display: block;
+    }
+
+    /* Ajustar padding para que los botones sean cuadrados centrados */
+    .btn-logout,
+    .btn-clave {
+        padding: 0.7rem;
+    }
+
+
+
+
+    /* Distribuir las pestañas equitativamente en móviles */
+    .container-tab{
+        width: 100%;
+        position: fixed;
+        bottom: 2.5%;
+        margin-left: -1rem;
+        padding: 0px 10px;
+    }
+    .tabs {
+        justify-content: space-around;
+        background-color: #e9ecf1;
+        border: 1px solid #b6b6b6;
+      
+        border-radius: 50px;
+        padding: 5px 10px;
+        width: 100%;
+        margin-bottom: 0;
+        gap: 0;
+       
+    }
+
+    .tab-btn {
+        flex: 1;
+        padding: 0.75rem 0.5rem;
+    }
+.tab-btn{
+    border-radius: 50px;
+}
+    .tab-btn.active {
+    color: #1e293b;
+    border-bottom-color: #2564eb00;
+    background-color: #c8d5ec;
+}
+
+    /* Ocultar el texto */
+    .tab-text {
+        display: none;
+    }
+
+    /* Mostrar solo los iconos */
+    .tab-icon {
+        display: block;
+    }
+}
+
+@media (max-width: 640px) {
+    header {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .tabs {
+        flex-wrap: wrap;
+    }
+
+    .period-filters {
+        justify-content: flex-start;
+    }
+
+    .btn-filter {
+        flex: 1 1 auto;
+        text-align: center;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+}
